@@ -1,50 +1,93 @@
-import React, { Component } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './pages/home/Home';
+import Signup from './pages/sign-up/Signup';
+import Login from './pages/sign-in/Login';
+import Logout from './pages/sign-out/Logout';
+import Library from './pages/library/Library';
+import AdminDashboard from './pages/admin/admin-dashboard/AdminDashboard';
+import UserDashboard from './pages/user/user-dashboard/UserDashboard';
+import IssuedBooks from './pages/issued-book/IssuedBooks';
+import BookDetails from './pages/book/book-details/BookDetails';
+import UserBooks from './pages/user/user-books/UserBooks';
+import AdminBooks from './pages/admin/admin-books/AdminBooks';
+import BookSection from './pages/book/book-section/BookSection';
+import UserSection from './pages/user/user-section/UserSection';
+import AddBook from './pages/book/add-book/AddBook';
+import EditUser from './pages/edit-user/EditUser';
+import NotFound from './pages/not-found/NotFound';
+import './App.css';
 
-class LambdaDemo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { loading: false, msg: null }
-  }
-
-  handleClick = api => e => {
-    e.preventDefault()
-
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
-      .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
-  }
-
-  render() {
-    const { loading, msg } = this.state
-
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
-    )
-  }
-}
-
-class App extends Component {
-  render() {
-    return (
+const App = () => {
+  return (
+    <Router>
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
-        </header>
-      </div>
-    )
-  }
-}
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
 
-export default App
+          <Route path="/signup">
+            <Signup />
+          </Route>
+
+          <Route path="/login">
+            <Login />
+          </Route>
+
+          <Route path="/library">
+            <Library />
+          </Route>
+
+          <Route path="/logout">
+            <Logout />
+          </Route>
+
+          <Route path="/admin-dashboard">
+            <AdminDashboard />
+          </Route>
+
+          <Route path="/user-dashboard">
+            <UserDashboard />
+          </Route>
+
+          <Route path="/issued-books">
+            <IssuedBooks />
+          </Route>
+
+          <Route path="/user-books">
+            <UserBooks />
+          </Route>
+
+          <Route path="/admin-books">
+            <AdminBooks />
+          </Route>
+
+          <Route path="/books/:id">
+            <BookDetails />
+          </Route>
+
+          <Route path="/book-section">
+            <BookSection />
+          </Route>
+
+          <Route path="/user-section">
+            <UserSection />
+          </Route>
+
+          <Route path="/edit-user/:id">
+            <EditUser />
+          </Route>
+
+          <Route path="/add-books">
+            <AddBook />
+          </Route>
+
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+};
+export default App;
