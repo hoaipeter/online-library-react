@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
+import { BOOK_API } from '../../services/api-url';
 
 const BooksList = ({ books, loading }) => {
   const history = useHistory();
@@ -15,7 +16,7 @@ const BooksList = ({ books, loading }) => {
     );
   }
   const deleteBook = (id) => {
-    fetch('http://localhost:5000/books/' + id, {
+    fetch(BOOK_API + id, {
       method: 'DELETE'
     }).then(() => {
       history.push('/admin-dashboard');
@@ -51,7 +52,7 @@ const BooksList = ({ books, loading }) => {
                   }}
                   variant="danger"
                 >
-                  <i className="fas fa-trash"></i>
+                  <i className="fas fa-trash" />
                 </Button>
               </td>
             </tr>

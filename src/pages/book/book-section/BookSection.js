@@ -5,6 +5,7 @@ import { Button, Container, Row, Col, ListGroup } from 'react-bootstrap';
 import BooksList from '../../../components/book/BooksList';
 import PaginationComp from '../../../components/pagination/PaginationComp';
 import Header from '../../../components/header/Header';
+import { BOOK_API } from '../../../services/api-url';
 
 const BookSection = () => {
   const [books, setBooks] = useState([]);
@@ -14,7 +15,7 @@ const BookSection = () => {
 
   const fetchBooks = async () => {
     setLoading(true);
-    const res = await fetch('http://localhost:5000/books', {
+    const res = await fetch(BOOK_API, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

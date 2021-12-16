@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Form, Container, Row, Col, ListGroup } from 'react-bootstrap';
 import Header from '../../../components/header/Header';
+import { BOOK_API } from '../../../services/api-url';
 
 const AddBook = () => {
   const [title, setTitle] = useState('');
@@ -27,7 +28,7 @@ const AddBook = () => {
       status
     };
 
-    fetch('http://localhost:5000/books', {
+    fetch(BOOK_API, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(book)
@@ -36,6 +37,7 @@ const AddBook = () => {
       history.push('/book-section');
     });
   };
+
   return (
     <div>
       <Header />

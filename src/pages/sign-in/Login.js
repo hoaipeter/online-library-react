@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Header from '../../components/header/Header';
+import { AUTHENTICATION_API } from '../../services/api-url';
 
 const Login = () => {
   const history = useHistory();
@@ -9,7 +10,7 @@ const Login = () => {
 
   const loginUser = async (e) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:5000/signin', {
+    const res = await fetch(AUTHENTICATION_API.signIn, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

@@ -4,9 +4,10 @@ import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import UserList from '../../../components/user-list/UserList';
 import Header from '../../../components/header/Header';
 import useFetch from '../../../hooks/useFetch';
+import { USER_API } from '../../../services/api-url';
 
 const UserSection = () => {
-  const { data: users, isPending, error } = useFetch('http://localhost:5000/users');
+  const { data: users, isPending, error } = useFetch(USER_API.base);
   return (
     <div>
       <Header />

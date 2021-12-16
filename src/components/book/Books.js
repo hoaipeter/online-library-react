@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Card, Badge, Row, Col } from 'react-bootstrap';
+import { LIBRARY_API } from '../../services/api-url';
 
 const Books = ({ books, loading, user }) => {
   const [title, setTitle] = useState('');
@@ -20,7 +21,7 @@ const Books = ({ books, loading, user }) => {
   }
   const issueBook = async (e) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:5000/issueBook', {
+    const res = await fetch(LIBRARY_API.issueBook, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

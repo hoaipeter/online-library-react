@@ -1,12 +1,13 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { AUTHENTICATION_API } from '../../services/api-url';
 
 const Logout = () => {
   const history = useHistory();
 
   useEffect(() => {
-    fetch('/logout', {
+    fetch(AUTHENTICATION_API.logout, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

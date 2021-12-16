@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Button, Table, Container, Row, Col, ListGroup } from 'react-bootstrap';
 import moment from 'moment';
 import Header from '../../../components/header/Header';
+import { ADMIN_API } from '../../../services/api-url';
 
 const AdminBooks = () => {
   const [books, setBooks] = useState([]);
@@ -11,7 +12,7 @@ const AdminBooks = () => {
 
   const getIssuedBooks = async (id) => {
     try {
-      const res = await fetch('http://localhost:5000/admin/adminBooks', {
+      const res = await fetch(ADMIN_API.adminBooks, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -31,7 +32,7 @@ const AdminBooks = () => {
   };
 
   const deleteIssueBook = (id) => {
-    fetch('http://localhost:5000/admin/adminBooks/' + id, {
+    fetch(`${ADMIN_API.adminBooks}/` + id, {
       method: 'DELETE'
     }).then(() => {
       history.push('/admin-dashboard');

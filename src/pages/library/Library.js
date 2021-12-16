@@ -6,6 +6,7 @@ import Books from '../../components/book/Books';
 import PaginationComp from '../../components/pagination/PaginationComp';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
+import { BOOK_API, LIBRARY_API } from '../../services/api-url';
 
 const Library = () => {
   const history = useHistory();
@@ -18,7 +19,7 @@ const Library = () => {
 
   const callLibrary = async () => {
     try {
-      const res = await fetch('http://localhost:5000/library', {
+      const res = await fetch(LIBRARY_API.library, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -42,7 +43,7 @@ const Library = () => {
   const fetchBooks = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/books', {
+      const res = await fetch(BOOK_API, {
         method: 'GET',
         headers: {
           Accept: 'application/json',

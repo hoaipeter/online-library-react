@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Header from '../../components/header/Header';
+import { AUTHENTICATION_API } from '../../services/api-url';
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -26,7 +27,7 @@ const Signup = () => {
     e.preventDefault();
 
     const { name, email, phone, password, cpassword } = user;
-    const res = await fetch('http://localhost:5000/register', {
+    const res = await fetch(AUTHENTICATION_API.register, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

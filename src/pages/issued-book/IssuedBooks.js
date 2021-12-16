@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { Container, Row, Col, ListGroup, Table } from 'react-bootstrap';
 import Header from '../../components/header/Header';
+import { ADMIN_API } from '../../services/api-url';
 
 const IssuedBooks = () => {
   const [issuedBooks, setIssuedBooks] = useState([]);
 
   const getIssuedBooks = async () => {
     try {
-      const res = await fetch('http://localhost:5000/admin/issuedBooks', {
+      const res = await fetch(ADMIN_API.issuedBooks, {
         method: 'GET',
         headers: {
           Accept: 'application/json',

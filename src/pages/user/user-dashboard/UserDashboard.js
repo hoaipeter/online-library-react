@@ -4,6 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import Header from '../../../components/header/Header';
 import Profile from '../../../components/profile/Profile';
+import { USER_API } from '../../../services/api-url';
 
 const UserDashboard = () => {
   const history = useHistory();
@@ -11,7 +12,7 @@ const UserDashboard = () => {
 
   const callUserDashboard = async () => {
     try {
-      const res = await fetch('http://localhost:5000/users/dashboard', {
+      const res = await fetch(USER_API.dashboard, {
         method: 'GET',
         headers: {
           Accept: 'application/json',

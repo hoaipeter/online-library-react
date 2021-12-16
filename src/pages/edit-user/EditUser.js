@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { Button, Container, Row, Col, ListGroup, Form } from 'react-bootstrap';
 import Header from '../../components/header/Header';
+import { USER_API } from '../../services/api-url';
 
 const EditUser = () => {
   const [role, setRole] = useState();
@@ -10,7 +11,7 @@ const EditUser = () => {
   const history = useHistory();
   const user = { role };
   const editUser = () => {
-    fetch('http://localhost:5000/users/' + id, {
+    fetch(USER_API.base + id, {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',

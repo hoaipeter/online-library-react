@@ -4,13 +4,14 @@ import { useHistory, Link } from 'react-router-dom';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import Header from '../../../components/header/Header';
 import Profile from '../../../components/profile/Profile';
+import { ADMIN_API } from '../../../services/api-url';
 
 const AdminDashboard = () => {
   const history = useHistory();
   const [adminData, setAdminData] = useState([]);
   const callAdminDashboard = async () => {
     try {
-      const res = await fetch('http://localhost:5000/admin/dashboard', {
+      const res = await fetch(ADMIN_API.dashboard, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -36,10 +37,12 @@ const AdminDashboard = () => {
       history.push('/login');
     }
   };
+
   useEffect(() => {
     callAdminDashboard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div>
       <Header />

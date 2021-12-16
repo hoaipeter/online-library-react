@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import Header from '../../../components/header/Header';
 import useFetch from '../../../hooks/useFetch';
+import { BOOK_API } from '../../../services/api-url';
 
 const BookDetails = () => {
   const { id } = useParams();
-  const { data: book, error, isPending } = useFetch('http://localhost:5000/books/' + id);
+  const { data: book, error, isPending } = useFetch(BOOK_API + id);
 
   return (
     <div>
