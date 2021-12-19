@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Header from '../../components/header/Header';
 import { AUTHENTICATION_API } from '../../services/api-url';
 
 const Signup = () => {
   const [user, setUser] = useState({
-    name: '',
+    firstname: '',
+    lastname: '',
     email: '',
     phone: '',
     password: '',
@@ -24,27 +26,51 @@ const Signup = () => {
   };
 
   const postData = async (e) => {
-    e.preventDefault();
+    if (
+      user.email !== '' &&
+      user.password !== '' &&
+      user.firstname !== '' &&
+      user.lastname !== '' &&
+      user.phone !== '' &&
+      user.cpassword !== ''
+    ) {
+      e.preventDefault();
 
-    const { name, email, phone, password, cpassword } = user;
-    const res = await fetch(AUTHENTICATION_API.register, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-        role: 'user',
-        password: password,
-        cpassword: cpassword
-      })
-    });
-    const data = await res.json();
-    if (res.status === 422 || !data) {
-      window.alert('Invalid Details');
-    } else {
-      window.alert('Registration Successful');
-      history.push('/login');
+      const { firstname, lastname, email, phone, password, cpassword } = user;
+      const res = await fetch(AUTHENTICATION_API.register, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstname: firstname.trim(),
+          lastname: lastname.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          role: 'user',
+          password: password.trim(),
+          cpassword: cpassword.trim()
+        })
+      });
+      const data = await res.json();
+      if (res.status === 422 || !data) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid Details',
+          scrollbarPadding: false
+        });
+      } else {
+        Swal.fire({
+          title: 'Registration Successful',
+          text: 'You will be redirected to login',
+          timer: 1000,
+          showConfirmButton: false,
+          scrollbarPadding: false,
+          icon: 'success'
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            history.push('/login');
+          }
+        });
+      }
     }
   };
 
@@ -58,14 +84,29 @@ const Signup = () => {
             <span className="signup-form-title">Sign Up</span>
 
             <div className="wrap-input">
-              <span className="label-input">Name</span>
+              <span className="label-input">First Name</span>
               <input
                 className="input"
                 type="text"
-                name="name"
-                value={user.name}
+                name="firstname"
+                required
+                value={user.firstname}
                 onChange={handleInputs}
-                placeholder="Username"
+                placeholder="First Name"
+              />
+              <span className="focus-input"></span>
+            </div>
+
+            <div className="wrap-input">
+              <span className="label-input">Last Name</span>
+              <input
+                className="input"
+                type="text"
+                name="lastname"
+                required
+                value={user.lastname}
+                onChange={handleInputs}
+                placeholder="Last Name"
               />
               <span className="focus-input"></span>
             </div>
@@ -76,6 +117,7 @@ const Signup = () => {
                 className="input"
                 type="email"
                 name="email"
+                required
                 value={user.email}
                 onChange={handleInputs}
                 placeholder="Email Address"
@@ -89,6 +131,7 @@ const Signup = () => {
                 className="input"
                 type="Number"
                 name="phone"
+                required
                 value={user.phone}
                 onChange={handleInputs}
                 placeholder="Phone Number"
@@ -102,6 +145,7 @@ const Signup = () => {
                 className="input"
                 type="password"
                 name="password"
+                required
                 value={user.password}
                 onChange={handleInputs}
                 placeholder="**********"
@@ -115,6 +159,7 @@ const Signup = () => {
                 className="input"
                 type="password"
                 name="cpassword"
+                required
                 value={user.cpassword}
                 onChange={handleInputs}
                 placeholder="**********"

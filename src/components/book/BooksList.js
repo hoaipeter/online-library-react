@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import moment from 'moment';
+import Swal from 'sweetalert2';
 import { BOOK_API } from '../../services/api-url';
 
 const BooksList = ({ books, loading }) => {
@@ -15,13 +15,23 @@ const BooksList = ({ books, loading }) => {
       </div>
     );
   }
+
   const deleteBook = (id) => {
     fetch(BOOK_API + id, {
       method: 'DELETE'
-    }).then(() => {
-      history.push('/admin-dashboard');
-    });
+    })
+      .then(() => {
+        history.push('/admin-dashboard');
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Something went wrong',
+          scrollbarPadding: false
+        });
+      });
   };
+
   return (
     <div>
       <Table className="mt-4" striped bordered hover responsive>
@@ -41,9 +51,9 @@ const BooksList = ({ books, loading }) => {
             <tr key={i}>
               <td>{i + 1}</td>
               <td>{book.title}</td>
-              <td>{book.isbn}</td>
-              <td>{book.pageCount}</td>
-              <td>{moment(book.publishedDate).format('DD-MM-YYYY')}</td>
+              <td>{book.isbn && book.isbn !== 0 ? book.isbn : 'N/A'}</td>
+              <td>{book.pageCount && book.pageCount !== 0 ? book.pageCount : 'N/A'}</td>
+              <td>{book.publishedDate && book.publishedDate !== '' ? book.publishedDate : 'N/A'}</td>
               <td>{book.status}</td>
               <td>
                 <Button

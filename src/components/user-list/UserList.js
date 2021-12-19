@@ -20,12 +20,14 @@ const UserList = ({ users }) => {
           {users.map((user, i) => (
             <tr key={i}>
               <td>{i + 1}</td>
-              <td>{user.name}</td>
+              <td>
+                {user.firstname} {user.lastname}
+              </td>
               <td>{user.email}</td>
               <td>{user.phone}</td>
               <td>{user.role}</td>
               <td>
-                <Button as={Link} to={`/edit-user/${user._id}`} variant="primary">
+                <Button as={Link} to={`/edit-user/${user._id}`} variant="info">
                   <i className="fas fa-edit" />
                 </Button>
               </td>

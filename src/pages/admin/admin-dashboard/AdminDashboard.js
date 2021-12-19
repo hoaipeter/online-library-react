@@ -4,11 +4,13 @@ import { useHistory, Link } from 'react-router-dom';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import Header from '../../../components/header/Header';
 import Profile from '../../../components/profile/Profile';
+import Footer from '../../../components/footer/Footer';
 import { ADMIN_API } from '../../../services/api-url';
 
 const AdminDashboard = () => {
   const history = useHistory();
   const [adminData, setAdminData] = useState([]);
+
   const callAdminDashboard = async () => {
     try {
       const res = await fetch(ADMIN_API.dashboard, {
@@ -22,15 +24,10 @@ const AdminDashboard = () => {
       const data = await res.json();
       setAdminData(data);
 
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      } else {
-        if (data.role === 'admin') {
-          history.push('/admin-dashboard');
-        } else if (data.role === 'user') {
-          history.push('/user-dashboard');
-        }
+      if (data.role === 'admin') {
+        history.push('/admin-dashboard');
+      } else if (data.role === 'user') {
+        history.push('/user-dashboard');
       }
     } catch (err) {
       console.log(err);
@@ -40,7 +37,6 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     callAdminDashboard();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -72,6 +68,7 @@ const AdminDashboard = () => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };

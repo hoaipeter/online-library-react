@@ -1,5 +1,8 @@
 const API_BASE_URL = 'https://online-library-api.herokuapp.com';
 
+// Local
+// const API_BASE_URL = 'http://localhost:5000';
+
 export const ADMIN_API = {
   dashboard: `${API_BASE_URL}/admin/dashboard`,
   issuedBooks: `${API_BASE_URL}/admin/issuedBooks`,

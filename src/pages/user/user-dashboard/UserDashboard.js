@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import Header from '../../../components/header/Header';
+import Footer from '../../../components/footer/Footer';
 import Profile from '../../../components/profile/Profile';
 import { USER_API } from '../../../services/api-url';
 
@@ -20,14 +21,9 @@ const UserDashboard = () => {
         },
         credentials: 'include'
       });
+
       const data = await res.json();
       setUserData(data);
-
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
-
       if (data.role === 'admin') {
         history.push('/admin-dashboard');
       } else if (data.role === 'user') {
@@ -64,6 +60,7 @@ const UserDashboard = () => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AUTHENTICATION_API } from '../../services/api-url';
 
@@ -18,10 +17,6 @@ const Logout = () => {
       .then((res) => {
         localStorage.clear();
         history.push('/login', { replace: true });
-        if (!res.status === 200) {
-          const error = new Error(res.error);
-          throw error;
-        }
       })
       .catch((err) => {
         console.log(err);

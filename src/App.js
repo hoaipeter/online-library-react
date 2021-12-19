@@ -12,7 +12,6 @@ import UserBooks from './pages/user/user-books/UserBooks';
 import AdminBooks from './pages/admin/admin-books/AdminBooks';
 import BookSection from './pages/book/book-section/BookSection';
 import UserSection from './pages/user/user-section/UserSection';
-import AddBook from './pages/book/add-book/AddBook';
 import EditUser from './pages/edit-user/EditUser';
 import NotFound from './pages/not-found/NotFound';
 import './App.css';
@@ -76,10 +75,6 @@ const App = () => {
 
           <Route path="/edit-user/:id">
             <EditUser />
-          </Route>
-
-          <Route path="/add-books">
-            <AddBook />
           </Route>
 
           <Route path="*">

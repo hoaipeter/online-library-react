@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 
 const Header = () => {
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem('user-info');
+    if (userInfo) {
+      setIsLogin(true);
+    }
+  }, []);
+
   return (
     <div>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -23,7 +32,7 @@ const Header = () => {
             </Nav>
 
             <Nav>
-              {localStorage.getItem('user-info') ? (
+              {isLogin ? (
                 <Nav.Link as={Link} to="/logout">
                   Logout <i className="fas fa-sign-in-alt" />
                 </Nav.Link>

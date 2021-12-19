@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Header from '../../components/header/Header';
 import { AUTHENTICATION_API } from '../../services/api-url';
 
@@ -9,23 +10,29 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const loginUser = async (e) => {
-    e.preventDefault();
-    const res = await fetch(AUTHENTICATION_API.signIn, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      }),
-      credentials: 'include'
-    });
-    const data = await res.json();
-    localStorage.setItem('user-info', JSON.stringify(data));
-    if (res.status === 400 || !data) {
-      window.alert('Invalid Credentials');
-    } else {
-      history.push('/admin-dashboard');
-      window.alert('Login Successful');
+    if (email !== '' && password !== '') {
+      e.preventDefault();
+      const res = await fetch(AUTHENTICATION_API.signIn, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        }),
+        credentials: 'include'
+      });
+      const data = await res.json();
+
+      if (res.status === 400 || !data) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid Credentials',
+          scrollbarPadding: false
+        });
+      } else {
+        localStorage.setItem('user-info', JSON.stringify(data));
+        history.push('/admin-dashboard');
+      }
     }
   };
 
@@ -45,6 +52,7 @@ const Login = () => {
                 type="email"
                 name="email"
                 value={email}
+                required
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
@@ -59,6 +67,7 @@ const Login = () => {
                 className="input"
                 type="password"
                 name="password"
+                required
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);

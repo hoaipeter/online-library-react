@@ -1,48 +1,52 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Row, Col, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import BooksList from '../../../components/book/BooksList';
 import PaginationComp from '../../../components/pagination/PaginationComp';
 import Header from '../../../components/header/Header';
+import Footer from '../../../components/footer/Footer';
 import { BOOK_API } from '../../../services/api-url';
 
 const BookSection = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [booksPerPage] = useState(20);
+  const [booksPerPage] = useState(9);
+  const [numBooks, setNumBooks] = useState(0);
 
-  const fetchBooks = async () => {
+  const fetchBooks = async (currentPage) => {
     setLoading(true);
-    const res = await fetch(BOOK_API, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-type': 'application/json'
-      }
-    });
-    const data = await res.json();
-    setBooks(data);
-    setLoading(false);
+    try {
+      const res = await fetch(`${BOOK_API}?page=${currentPage}&size=${booksPerPage}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json'
+        }
+      });
+      const data = await res.json();
+      setBooks(data.books);
+      setNumBooks(data.count);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
   };
   useEffect(() => {
-    fetchBooks();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchBooks(currentPage);
   }, []);
-
-  /*
-   * Get current Books
-   */
-  const indexOfLastBook = currentPage * booksPerPage;
-  const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
 
   /*
    * Change Page
    */
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+    if (pageNumber !== currentPage) {
+      fetchBooks(pageNumber);
+      setCurrentPage(pageNumber);
+    }
   };
 
   return (
@@ -71,21 +75,21 @@ const BookSection = () => {
           </Col>
           <Col md={10}>
             <Row>
-              <Col md={4} className="mt-1">
-                <Button as={Link} to="/add-books" variant="success">
-                  <i className="fas fa-plus-circle" /> Add
-                </Button>
-              </Col>
-            </Row>
-            <Row>
               <Col>
-                {books && <BooksList books={currentBooks} loading={loading} />}
-                <PaginationComp booksPerPage={booksPerPage} totalBooks={books.length} paginate={paginate} />
+                {books && <BooksList books={books} loading={loading} />}
+                <PaginationComp
+                  loading={loading}
+                  currentPage={currentPage}
+                  totalCount={numBooks}
+                  pageSize={booksPerPage}
+                  onPageChange={(page) => paginate(page)}
+                />
               </Col>
             </Row>
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };

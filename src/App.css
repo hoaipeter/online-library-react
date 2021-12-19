@@ -13,6 +13,7 @@ html {
   width: 100%;
   overflow-y: scroll;
 }
+
 body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
@@ -69,18 +70,21 @@ td {
   text-align: center;
   color: #fff;
 }
+
 .img-content {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .img-content h2 {
   text-transform: uppercase;
   font-weight: 800;
   margin: 0;
   font-size: 50px;
 }
+
 .img-content p {
   text-transform: capitalize;
   font-weight: 500;
@@ -93,6 +97,7 @@ td {
     font-weight: 600;
     font-size: 30px;
   }
+
   .img-content p {
     font-weight: 500;
     font-size: 12px;
@@ -109,6 +114,7 @@ footer {
   width: 100vw;
   color: #fff;
 }
+
 .footer-content {
   display: flex;
   align-items: center;
@@ -122,7 +128,8 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1rem 0 1rem 0;
+  margin-bottom: 0;
+  padding-left: 0;
 }
 
 .socials li {
@@ -135,17 +142,18 @@ footer {
 }
 
 .socials a i {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   transition: color 0.4s ease;
 }
 
 .socials a:hover i {
   color: aqua;
 }
+
 .footer-bottom {
-  background: #000;
-  width: 100vw;
-  padding: 20px 0;
+  /*background: #000;*/
+  /*width: 100vw;*/
+  /*padding: 20px 0;*/
   text-align: center;
 }
 
@@ -153,12 +161,14 @@ footer {
   font-size: 14px;
   word-spacing: 2px;
   text-transform: capitalize;
+  color: #ffffff;
 }
+
 .footer-bottom span {
   text-transform: uppercase;
   opacity: 0.4;
-  font-weight: 400;
-  color: #0d6efd;
+  font-weight: 700;
+  color: #0dcaf0;
 }
 
 /* Signup Form */
@@ -396,7 +406,6 @@ input[type='number'] {
 .wrap-signin-form-btn {
   display: block;
   position: relative;
-  padding-bottom: 10px;
 }
 
 .signin-form-btn {
@@ -413,4 +422,8 @@ input[type='number'] {
   font-size: 19px;
   color: #666;
   text-decoration: none;
+}
+
+.swal2-confirm {
+  background-color: #0d6efd !important;
 }

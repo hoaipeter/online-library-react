@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Button, Table, Container, Row, Col, ListGroup } from 'react-bootstrap';
 import moment from 'moment';
 import Header from '../../../components/header/Header';
+import Footer from '../../../components/footer/Footer';
 import { ADMIN_API } from '../../../services/api-url';
 
 const AdminBooks = () => {
@@ -22,10 +23,6 @@ const AdminBooks = () => {
       });
       const data = await res.json();
       setBooks(data);
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
     } catch (err) {
       console.log(err);
     }
@@ -91,7 +88,7 @@ const AdminBooks = () => {
                     <td>{book.userName}</td>
                     <td>{book.userId}</td>
                     <td>{moment(book.issueDate).format('DD-MM-YYYY')}</td>
-                    <td>{moment(book.returnDate).add(7, 'days').format('DD-MM-YYYY')}</td>
+                    <td>{moment(book.returnDate).format('DD-MM-YYYY')}</td>
                     <td>
                       <Button
                         variant="danger"
@@ -109,6 +106,7 @@ const AdminBooks = () => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };

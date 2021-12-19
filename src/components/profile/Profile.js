@@ -16,22 +16,13 @@ const Profile = ({ user }) => {
                       <h5>Username:</h5>
                     </Col>
                     <Col md={9} className="text-secondary text-capitalize">
-                      {user.name}
+                      {user.firstname} {user.lastname}
                     </Col>
                   </Row>
                   <hr />
                   <Row>
                     <Col md={3}>
-                      <h5>User Id:</h5>
-                    </Col>
-                    <Col md={9} className="text-secondary">
-                      {user._id}
-                    </Col>
-                  </Row>
-                  <hr />
-                  <Row>
-                    <Col md={3}>
-                      <h5>Email Id:</h5>
+                      <h5>Email:</h5>
                     </Col>
                     <Col md={9} className="text-secondary">
                       {user.email}
@@ -55,7 +46,6 @@ const Profile = ({ user }) => {
                       {user.role}
                     </Col>
                   </Row>
-                  <hr />
                 </Card.Body>
               </Card>
             </Col>

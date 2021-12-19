@@ -2,7 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { Button, Container, Row, Col, ListGroup, Form } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
 import { USER_API } from '../../services/api-url';
 
 const EditUser = () => {
@@ -18,9 +20,23 @@ const EditUser = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)
-    }).then(() => {
-      window.alert('User Role Modified!');
-    });
+    })
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'User Role Modified!',
+          showConfirmButton: false,
+          scrollbarPadding: false,
+          timer: 1000
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Something went wrong',
+          scrollbarPadding: false
+        });
+      });
     history.push('/user-section');
   };
 
@@ -65,6 +81,7 @@ const EditUser = () => {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };
