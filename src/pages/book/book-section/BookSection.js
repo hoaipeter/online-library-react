@@ -36,6 +36,7 @@ const BookSection = () => {
   };
   useEffect(() => {
     fetchBooks(currentPage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /*
