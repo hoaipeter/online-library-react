@@ -31,4 +31,8 @@ $ npm install
 $ npm start
 ```
 
-(Optional) If you want to build, Open `terminal` and run `npm build:app` to build a production version
+(Optional) If you want to build, Open `terminal` and run
+```sh
+$ npm build:app
+```
+ to build a production version
