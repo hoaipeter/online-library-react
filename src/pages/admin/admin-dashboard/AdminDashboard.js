@@ -9,7 +9,7 @@ import { ADMIN_API } from '../../../services/api-url';
 
 const AdminDashboard = () => {
   const history = useHistory();
-  const [adminData, setAdminData] = useState([]);
+  const [adminData, setAdminData] = useState();
 
   const callAdminDashboard = async () => {
     try {
@@ -22,7 +22,7 @@ const AdminDashboard = () => {
         credentials: 'include'
       });
       const data = await res.json();
-      console.log("data: ", data);
+      console.log('data: ', res);
       setAdminData(data);
 
       if (data.role === 'admin') {
