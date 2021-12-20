@@ -16,7 +16,19 @@ React, React Bootstrap, Bootstrap, Animated.css, Netlify
 The app is hosted on Netlify: [Online Library](https://hungry-euler-9c01bf.netlify.app)
 
 ## How to run:
-1) Open `terminal` and run `npm install` to install libraries
+
+Make sure you have [Node.js](http://nodejs.org/) installed.
+
+1) 
+```sh
+$ git clone https://github.com/hoaipeter/online-library-react.git # or clone your own fork
+$ cd online-library-react
+$ npm install
+```
 2) Go to file [api-url.js](src/services/api-url.js) and change the variable `API_BASE_URL` to local server
-3) Open `terminal` and run `npm start` to start the app
-4) (Optional) If you want to build, Open `terminal` and run `npm build:app` to build a production version
+3) 
+```sh
+$ npm start
+```
+
+(Optional) If you want to build, Open `terminal` and run `npm build:app` to build a production version
