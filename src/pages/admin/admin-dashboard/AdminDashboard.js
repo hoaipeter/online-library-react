@@ -22,7 +22,6 @@ const AdminDashboard = () => {
         credentials: 'include'
       });
       const data = await res.json();
-      console.log("data: ", res);
       setAdminData(data);
 
       if (data.role === 'admin') {
