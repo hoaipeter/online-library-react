@@ -151,10 +151,8 @@ footer {
 }
 
 .footer-bottom {
-  /*background: #000;*/
-  /*width: 100vw;*/
-  /*padding: 20px 0;*/
   text-align: center;
+  white-space: normal;
 }
 
 .footer-bottom p {
